@@ -19,7 +19,8 @@ var smtpClient = new SmtpClient
     Port = int.Parse(smtpServerConfiguration.GetSection("Port").Value),
     EnableSsl = true,
     DeliveryMethod = SmtpDeliveryMethod.Network,
-    Credentials = new NetworkCredential("xxx", "xxx")
+    Credentials = new NetworkCredential(smtpServerConfiguration.GetSection("NetworkCredentialUsername").Value, 
+                                         smtpServerConfiguration.GetSection("NetworkCredentialPassword").Value)
 };
 builder.Services.AddFluentEmail(smtpServerConfiguration.GetSection("DefaultSenderEmail").Value)
     .AddSmtpSender(smtpClient);

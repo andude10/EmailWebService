@@ -10,6 +10,9 @@ public class AppDbContext : DbContext
     {
     }
 
+    /// <summary>
+    /// Представление таблицы EmailMessage
+    /// </summary>
     public DbSet<EmailMessage> EmailMessages { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -3,6 +3,10 @@ using WebService.Models;
 
 namespace WebService.Services;
 
+/// <summary>
+/// EmailMessageFormatter объект отвечает за формирование
+/// сообщения из запроса json
+/// </summary>
 public class EmailMessageFormatter
 {
     /// <summary>

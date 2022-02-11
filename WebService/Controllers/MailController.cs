@@ -17,12 +17,12 @@ public class MailController : ControllerBase
     private readonly ILogger<MailController> _logger;
     private readonly EmailMessageFormatter _messageFormatter;
     private readonly EmailMessageSender _messageSender;
-    private readonly IMessagesRepository _messagesRepository;
+    private readonly IEmailMessagesRepository _emailMessagesRepository;
     
     public MailController(ILogger<MailController> logger, IDbContextFactory<AppDbContext> contextFactory)
     {
         _logger = logger;
-        _messagesRepository = new MessagesRepository(contextFactory);
+        _emailMessagesRepository = new EmailMessagesRepository(contextFactory);
         _messageFormatter = new EmailMessageFormatter();
         _messageSender = new EmailMessageSender();
     }
@@ -35,7 +35,7 @@ public class MailController : ControllerBase
     [HttpGet]
     public string GetMessages()
     {
-        return JsonConvert.SerializeObject(_messagesRepository.GetMessages());
+        return JsonConvert.SerializeObject(_emailMessagesRepository.GetMessages());
     }
 
     /// <summary>
@@ -61,6 +61,6 @@ public class MailController : ControllerBase
             _logger.LogError($"Результат отправки: {email.Result}, {e.Message}");
         }
         
-        _messagesRepository.Create(email);
+        _emailMessagesRepository.Create(email);
     }
 }
